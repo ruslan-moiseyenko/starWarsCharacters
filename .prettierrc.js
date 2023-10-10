@@ -1,0 +1,26 @@
+module.exports = {
+  arrowParens: 'avoid',
+  bracketSameLine: false,
+  bracketSpacing: true,
+  singleQuote: true,
+  trailingComma: 'all',
+  plugins: [require('@trivago/prettier-plugin-sort-imports')],
+  importOrder: [
+    '^react',
+    '^(r|@r)eact-navigation(.*)',
+    '^(r|@r)eact-native',
+    '^(r|@r)eact(.*)',
+    'antd/(.*)',
+    '<THIRD_PARTY_MODULES>',
+    '@/(.*)',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  '[typescript]': {
+    'editor.formatOnPaste': true,
+    'editor.formatOnSave': true,
+  },
+  'editor.formatOnPaste': true,
+  'editor.formatOnSave': true,
+};
