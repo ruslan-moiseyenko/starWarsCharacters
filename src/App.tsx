@@ -1,16 +1,18 @@
-import type { PropsWithChildren } from 'react';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+
+import RootStackNavigator from './Navigation/RootStackNavigator';
+import { store } from './Store/store';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaProvider>
-      <RootStackNavigator />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <RootStackNavigator />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default App;
