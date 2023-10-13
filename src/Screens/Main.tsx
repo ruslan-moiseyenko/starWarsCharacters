@@ -2,15 +2,16 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { RenderItem } from '@/Components/RenderItem';
-import { useAppDispatch, useAppSelector } from '@/Hooks/redux';
-import { useGetPeopleQuery } from '@/Services/api';
-import { addFavoriteCharacter } from '@/Store/Common/commonSlice';
+import { RenderItem } from '../Components/RenderItem';
+import { Icons } from '../Constants/icons';
+import { useAppDispatch, useAppSelector } from '../Hooks/redux';
+import { useGetPeopleQuery } from '../Services/api';
+import { addFavoriteCharacter } from '../Store/Common/commonSlice';
 import {
   getFavoriteFemaleCount,
   getFavoriteManCount,
   getFavoriteOthersCount,
-} from '@/Store/Common/selectors';
+} from '../Store/Common/selectors';
 
 export const Main = () => {
   const { data, error, isLoading } = useGetPeopleQuery();
@@ -19,9 +20,9 @@ export const Main = () => {
   const womenCount = useAppSelector(getFavoriteFemaleCount);
   const othersCount = useAppSelector(getFavoriteOthersCount);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  dispatch(addFavoriteCharacter({ people: data?.results }));
+  // dispatch(addFavoriteCharacter({ people: data?.results }));
 
   const characters = data?.results;
 

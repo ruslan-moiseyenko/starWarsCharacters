@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
+import {
+  isObjectEquivalent,
+  isObjectUniqueInArray,
+} from '../../Helpers/helpers';
 import { TCharacter } from '../types';
 
 export type CharactersState = {
@@ -8,25 +12,38 @@ export type CharactersState = {
 };
 
 const initialCharactersState: CharactersState = {
-  people: undefined,
+  people: [],
 };
 
 export const commonSlice = createSlice({
   name: 'common',
   initialState: initialCharactersState,
   reducers: {
-    addFavoriteCharacter: (
+    resetFavoriteCharacters: () => initialCharactersState,
+
+    toggleUniqueFavoriteCharacter: (
       state,
       action: PayloadAction<Partial<CharactersState>>,
-    ) => ({
-      ...state,
-      ...action.payload,
-    }),
-    resetFavoriteCharacters: () => initialCharactersState,
+    ) => {
+      if (action.payload.people) {
+        action.payload.people.forEach(newCharacter => {
+          if (state.people) {
+            if (isObjectUniqueInArray(state.people, newCharacter)) {
+              state.people.push(newCharacter);
+            } else {
+              state.people = state.people.filter(
+                character => !isObjectEquivalent(character, newCharacter),
+              );
+            }
+          }
+        });
+      }
+      return state;
+    },
   },
 });
 
-export const { addFavoriteCharacter, resetFavoriteCharacters } =
+export const { resetFavoriteCharacters, toggleUniqueFavoriteCharacter } =
   commonSlice.actions;
 
 export default commonSlice.reducer;
