@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { baseUrl } from '../Const/endpoints';
-import { TCharacter } from './../Store/types';
+import { ENDPOINTS } from '@/Constants/endpoints';
+import { TCharacter } from '@/Store/types';
 
 export type TPeopleResponse = {
   count: number;
@@ -12,10 +12,10 @@ export type TPeopleResponse = {
 
 export const StarWarsPeopleAPI = createApi({
   reducerPath: 'StarWarsPeopleAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: '' }),
   endpoints: builder => ({
     getPeople: builder.query<TPeopleResponse, void>({
-      query: () => 'people',
+      query: () => ENDPOINTS.PEOPLE,
     }),
     getCharacterById: builder.query<TCharacter, string>({
       query: id => `people/${id}`,

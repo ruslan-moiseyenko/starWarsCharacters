@@ -1,16 +1,16 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { RenderItem } from '../Components/RenderItem';
-import { useAppDispatch, useAppSelector } from '../Hooks/redux';
-import { useGetPeopleQuery } from '../Services/api';
-import { addFavoriteCharacter } from '../Store/Common/commonSlice';
+import { RenderItem } from '@/Components/RenderItem';
+import { useAppDispatch, useAppSelector } from '@/Hooks/redux';
+import { useGetPeopleQuery } from '@/Services/api';
+import { addFavoriteCharacter } from '@/Store/Common/commonSlice';
 import {
   getFavoriteFemaleCount,
   getFavoriteManCount,
   getFavoriteOthersCount,
-} from '../Store/Common/selectors';
+} from '@/Store/Common/selectors';
 
 export const Main = () => {
   const { data, error, isLoading } = useGetPeopleQuery();
