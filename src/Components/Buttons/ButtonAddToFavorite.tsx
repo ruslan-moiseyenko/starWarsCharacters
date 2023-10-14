@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 
-import { PressableOpacity } from '../../Components/PressableOpacity/PressableOpacity';
-import { Icons } from '../../Constants/icons';
+import { PressableOpacity } from '@/Components/PressableOpacity/PressableOpacity';
+import { Icons } from '@/Constants/icons';
 
 type ButtonAddToFavoriteProps = {
   onPress: () => void;

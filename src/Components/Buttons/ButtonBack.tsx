@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Icons } from '../../Constants/icons';
+import { Icons } from '@/Constants/icons';
 
 export const ButtonBack = () => {
   const navigation = useNavigation();

@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 
-import { Icons } from '../../Constants/icons';
-import { useAppDispatch } from '../../Hooks/redux';
-import { resetFavoriteCharacters } from '../../Store/Common/commonSlice';
+import { Icons } from '@/Constants/icons';
+import { useAppDispatch } from '@/Hooks/redux';
+import { resetFavoriteCharacters } from '@/Store/Common/commonSlice';
 
 type ButtonResetProps = {
   style?: ViewStyle;

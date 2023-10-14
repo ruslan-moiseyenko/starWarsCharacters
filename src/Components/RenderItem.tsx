@@ -3,14 +3,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
+import { ButtonAddToFavorite } from '@/Components/Buttons/ButtonAddToFavorite';
+import { isObjectUniqueInArray } from '@/Helpers/helpers';
+import { useAppDispatch, useAppSelector } from '@/Hooks/redux';
+import { toggleUniqueFavoriteCharacter } from '@/Store/Common/commonSlice';
 import { getAllFavorites } from '@/Store/Common/selectors';
-
-import { ButtonAddToFavorite } from '../Components/Buttons/ButtonAddToFavorite';
-import { isObjectUniqueInArray } from '../Helpers/helpers';
-import { useAppDispatch, useAppSelector } from '../Hooks/redux';
-import { toggleUniqueFavoriteCharacter } from '../Store/Common/commonSlice';
-import { TCharacter } from '../Store/types';
-import { COLORS } from '../Theme/Colors';
+import { TCharacter } from '@/Store/types';
+import { COLORS } from '@/Theme/Colors';
 
 type RenderItemProps = {
   item: TCharacter;
@@ -33,8 +32,14 @@ export const RenderItem = ({ item }: RenderItemProps) => {
     >
       <View style={styles.container}>
         <View style={styles.infoWrapper}>
-          <Text style={styles.text}>{item.name}</Text>
-          <Text style={styles.text}>{item.gender}</Text>
+          <View style={styles.itemWrapper}>
+            <Text style={styles.text}>Name: </Text>
+            <Text style={[styles.text, styles.boldText]}>{item.name}</Text>
+          </View>
+          <View style={styles.itemWrapper}>
+            <Text style={styles.text}>Gender: </Text>
+            <Text style={[styles.text, styles.boldText]}>{item.gender}</Text>
+          </View>
         </View>
         <ButtonAddToFavorite
           onPress={handleAddFavoriteClick}
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     padding: 10,
     flexDirection: 'row',
-    borderBottomColor: COLORS.BLACK,
+    borderBottomColor: COLORS.BROWN,
     borderBottomWidth: 1,
   },
   text: {
@@ -64,6 +69,13 @@ const styles = StyleSheet.create({
   infoWrapper: {
     width: '100%',
     backgroundColor: COLORS.BACKGROUND,
+  },
+  itemWrapper: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  boldText: {
+    fontWeight: '600',
   },
   button: {
     marginLeft: 'auto',

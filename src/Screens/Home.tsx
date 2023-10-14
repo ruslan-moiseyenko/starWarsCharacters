@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { COLORS } from '@/Theme/Colors';
-
-import { ButtonReset } from '../Components/Buttons/ButtonReset';
-import { Pagination } from '../Components/Pagination';
-import { RenderItem } from '../Components/RenderItem';
-import { ENDPOINTS } from '../Constants/endpoints';
-import { getPageNumberFromTheURL } from '../Helpers/helpers';
-import { useAppSelector } from '../Hooks/redux';
-import { useGetPeopleQuery } from '../Services/api';
+import { Board } from '@/Components/Board/Board';
+import { Pagination } from '@/Components/Pagination';
+import { RenderItem } from '@/Components/RenderItem';
+import { ENDPOINTS } from '@/Constants/endpoints';
+import { getPageNumberFromTheURL } from '@/Helpers/helpers';
+import { useAppSelector } from '@/Hooks/redux';
+import { useGetPeopleQuery } from '@/Services/api';
 import {
   getFavoriteFemaleCount,
   getFavoriteManCount,
   getFavoriteOthersCount,
-} from '../Store/Common/selectors';
+} from '@/Store/Common/selectors';
+import { COLORS } from '@/Theme/Colors';
 
 export const Home = () => {
   const [pageUrl, setPageUrl] = useState<string>(ENDPOINTS.PEOPLE);
-  const { data, isLoading } = useGetPeopleQuery(pageUrl || '');
+  const { data, isLoading } = useGetPeopleQuery(pageUrl);
 
   const menCount = useAppSelector(getFavoriteManCount);
   const womenCount = useAppSelector(getFavoriteFemaleCount);
@@ -29,13 +28,12 @@ export const Home = () => {
   return (
     <>
       <View style={styles.container}>
-        <Text>Home</Text>
-        <View>
-          <Text>Favorite Men: {menCount}</Text>
-          <Text>Favorite Women: {womenCount}</Text>
-          <Text>Favorite Others: {othersCount}</Text>
-          <ButtonReset />
-        </View>
+        <Board
+          menCount={menCount}
+          womenCount={womenCount}
+          othersCount={othersCount}
+        />
+
         {isLoading ? (
           <View style={styles.loadingWrapper}>
             <Text>...Loading</Text>
@@ -56,7 +54,7 @@ export const Home = () => {
           isBackDisabled={!data?.previous}
           isForwardDisabled={!data?.next}
           currentPage={getPageNumberFromTheURL(pageUrl)}
-          pages={data?.count ? Math.trunc(data.count / 10) : 0}
+          pages={data?.count ? Math.ceil(data.count / 10) : 0}
         />
       </View>
     </>

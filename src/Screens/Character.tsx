@@ -3,10 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { useRoute } from '@react-navigation/native';
 
+import { ButtonBack } from '@/Components/Buttons/ButtonBack';
 import { useGetPlanetQuery } from '@/Services/api';
-
-import { ButtonBack } from '../Components/Buttons/ButtonBack';
-import { TCharacter } from '../Store/types';
+import { COLORS } from '@/Theme/Colors';
 
 export const Character = () => {
   const route = useRoute();
@@ -16,13 +15,66 @@ export const Character = () => {
   const { data: planet, isLoading } = useGetPlanetQuery(character.homeworld);
 
   return (
-    <View>
-      <ButtonBack />
-      <Text>{character.name}</Text>
-      <Text>{character.gender}</Text>
-      {isLoading ? <Text>Loading...</Text> : <Text>{planet?.name}</Text>}
+    <View style={styles.container}>
+      <View style={styles.navigationWrapper}>
+        <ButtonBack />
+      </View>
+      <View style={styles.infoWrapper}>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.text}>Name: </Text>
+          <Text style={[styles.text, styles.boldText]}>{character.name}</Text>
+        </View>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.text}>Gender: </Text>
+          <Text style={[styles.text, styles.boldText]}>{character.gender}</Text>
+        </View>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.text}>Bird year: </Text>
+          <Text style={[styles.text, styles.boldText]}>
+            {character.birth_year}
+          </Text>
+        </View>
+
+        <View style={styles.itemWrapper}>
+          <Text style={styles.text}>Home world: </Text>
+          <Text style={[styles.text, styles.boldText]}>
+            {isLoading ? <Text>Loading...</Text> : <Text>{planet?.name}</Text>}
+          </Text>
+        </View>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.text}>Height: </Text>
+          <Text style={[styles.text, styles.boldText]}>{character.height}</Text>
+        </View>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.text}>Mass: </Text>
+          <Text style={[styles.text, styles.boldText]}>{character.mass}</Text>
+        </View>
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.BACKGROUND,
+  },
+  navigationWrapper: {
+    paddingVertical: 10,
+    borderBottomColor: COLORS.BROWN,
+    borderBottomWidth: 1,
+  },
+  infoWrapper: {
+    padding: 10,
+  },
+  text: {
+    color: COLORS.BLACK,
+  },
+  itemWrapper: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  boldText: {
+    fontWeight: '600',
+  },
+});

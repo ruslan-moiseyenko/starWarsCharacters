@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { TCharacter, TPlanet } from '../Store/types';
+import { TCharacter, TPlanet } from '@/Store/types';
 
 export type TPeopleResponse = {
   count: number;
