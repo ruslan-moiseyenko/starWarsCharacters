@@ -3,8 +3,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
+import { getAllFavorites } from '@/Store/Common/selectors';
+
 import { ButtonAddToFavorite } from '../Components/Buttons/ButtonAddToFavorite';
-import { useAppDispatch } from '../Hooks/redux';
+import { isObjectUniqueInArray } from '../Helpers/helpers';
+import { useAppDispatch, useAppSelector } from '../Hooks/redux';
 import { toggleUniqueFavoriteCharacter } from '../Store/Common/commonSlice';
 import { TCharacter } from '../Store/types';
 import { COLORS } from '../Theme/Colors';
@@ -16,6 +19,8 @@ type RenderItemProps = {
 export const RenderItem = ({ item }: RenderItemProps) => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
+
+  const favoriteCharacters = useAppSelector(getAllFavorites);
 
   const handleAddFavoriteClick = () => {
     dispatch(toggleUniqueFavoriteCharacter({ people: [item] }));
@@ -34,6 +39,11 @@ export const RenderItem = ({ item }: RenderItemProps) => {
         <ButtonAddToFavorite
           onPress={handleAddFavoriteClick}
           style={styles.button}
+          color={
+            isObjectUniqueInArray(favoriteCharacters || [], item)
+              ? COLORS.WHITE
+              : COLORS.RED
+          }
         />
       </View>
     </TouchableOpacity>
@@ -45,7 +55,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     padding: 10,
     flexDirection: 'row',
-    backgroundColor: COLORS.BLUE,
     borderBottomColor: COLORS.BLACK,
     borderBottomWidth: 1,
   },
@@ -58,8 +67,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginLeft: 'auto',
-    // position: 'absolute',
-    right: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },

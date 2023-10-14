@@ -2,7 +2,6 @@ export function isObjectEquivalent(
   objA: Record<string, any>,
   objB: Record<string, any>,
 ): boolean {
-  // Converts objects to JSON strings and compares them to check for equality
   return JSON.stringify(objA) === JSON.stringify(objB);
 }
 
@@ -16,4 +15,16 @@ export function isObjectUniqueInArray(
     }
   }
   return true;
+}
+
+export function getPageNumberFromTheURL(url: string): number {
+  const regex = /\b\d{1,3}\b/;
+
+  var page = url.match(regex);
+
+  if (page) {
+    return Number(page[0]);
+  } else {
+    return 1;
+  }
 }

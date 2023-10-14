@@ -1,22 +1,23 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 
 import { PressableOpacity } from '../../Components/PressableOpacity/PressableOpacity';
 import { Icons } from '../../Constants/icons';
-import { COLORS } from '../../Theme/Colors';
 
 type ButtonAddToFavoriteProps = {
   onPress: () => void;
   style?: ViewStyle;
+  color: string;
 };
 
 export const ButtonAddToFavorite = ({
   onPress,
   style,
+  color,
 }: ButtonAddToFavoriteProps) => {
   return (
     <PressableOpacity onPress={onPress} style={[styles.button, style]}>
-      <Icons.Heart style={styles.icon} color={COLORS.RED} />
+      <Icons.Heart style={styles.icon} color={color} />
     </PressableOpacity>
   );
 };

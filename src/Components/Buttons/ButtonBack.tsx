@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,6 @@ export const ButtonBack = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity style={styles.button} onPress={navigation.goBack}>
-      {/* <Text>ButtonBack</Text> */}
       <Icons.ArrowLeft />
     </TouchableOpacity>
   );

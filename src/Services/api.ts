@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { ENDPOINTS } from '../Constants/endpoints';
 import { TCharacter, TPlanet } from '../Store/types';
 
 export type TPeopleResponse = {
@@ -16,20 +15,14 @@ export const StarWarsPeopleAPI = createApi({
   reducerPath: 'StarWarsPeopleAPI',
   baseQuery: fetchBaseQuery({ baseUrl: '' }),
   endpoints: builder => ({
-    getPeople: builder.query<TPeopleResponse, void>({
-      query: () => ENDPOINTS.PEOPLE,
+    getPeople: builder.query<TPeopleResponse, string>({
+      query: url => url,
     }),
-    getCharacterById: builder.query<TCharacter, string>({
-      query: id => `people/${id}`,
-    }),
+
     getPlanet: builder.query<TPlanet, string>({
       query: url => url,
     }),
   }),
 });
 
-export const {
-  useGetPeopleQuery,
-  useGetCharacterByIdQuery,
-  useGetPlanetQuery,
-} = StarWarsPeopleAPI;
+export const { useGetPeopleQuery, useGetPlanetQuery } = StarWarsPeopleAPI;
