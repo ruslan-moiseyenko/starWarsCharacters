@@ -17,7 +17,7 @@ import { COLORS } from '@/Theme/Colors';
 
 export const Home = () => {
   const [pageUrl, setPageUrl] = useState<string>(ENDPOINTS.PEOPLE);
-  const { data, isLoading } = useGetPeopleQuery(pageUrl);
+  const { data, isLoading, isFetching } = useGetPeopleQuery(pageUrl);
 
   const menCount = useAppSelector(getFavoriteManCount);
   const womenCount = useAppSelector(getFavoriteFemaleCount);
@@ -34,7 +34,7 @@ export const Home = () => {
           othersCount={othersCount}
         />
 
-        {isLoading ? (
+        {isLoading || isFetching ? (
           <View style={styles.loadingWrapper}>
             <Text>...Loading</Text>
           </View>
