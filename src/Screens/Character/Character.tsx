@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { useRoute } from '@react-navigation/native';
-
 import { ButtonBack } from '@/Components/Buttons/ButtonBack';
+import { CharacterProps } from '@/Screens/Character/types';
 import { useGetPlanetQuery } from '@/Services/api';
 import { COLORS } from '@/Theme/Colors';
 
-export const Character = () => {
-  const route = useRoute();
-  //@ts-ignore
-  const character: TCharacter = route?.params?.item;
+export const Character = ({ route }: CharacterProps) => {
+  const { item: character } = route.params;
 
   const { data: planet, isLoading } = useGetPlanetQuery(character.homeworld);
 
