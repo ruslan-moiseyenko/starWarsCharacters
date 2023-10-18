@@ -7,7 +7,7 @@ import { Character } from '@/Screens/Character/Character';
 import { Home } from '@/Screens/Home/Home';
 import { TCharacter } from '@/Store/types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export type StackParamList = {
   Home: undefined;
@@ -19,8 +19,7 @@ const RootStackNavigator = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="App" component={Home} />
-          {/* @ts-ignore */}
+          <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Character" component={Character} />
         </Stack.Navigator>
       </NavigationContainer>
