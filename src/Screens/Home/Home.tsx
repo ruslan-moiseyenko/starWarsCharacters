@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
 import { Board } from '@/Components/Board/Board';
 import { Pagination } from '@/Components/Pagination';
@@ -36,7 +36,7 @@ export const Home = () => {
 
         {isLoading || isFetching ? (
           <View style={styles.loadingWrapper}>
-            <Text>...Loading</Text>
+            <ActivityIndicator size="large" color={COLORS.BROWN} />
           </View>
         ) : (
           <FlatList
